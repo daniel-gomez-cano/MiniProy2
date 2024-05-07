@@ -78,24 +78,27 @@ public class AgregarArticuloDialog extends JDialog {
     add(idLabel, gbc);
     gbc.gridx = 1;
     add(idField, gbc);
-
+    
+    gbc.gridx = 0;
+    gbc.gridy = 2;
     add(precioLabel,gbc);
+    gbc.gridx = 1;
     add(precioField,gbc);
 
     gbc.gridx = 0;
-    gbc.gridy = 2;
+    gbc.gridy = 3;
     add(descripcionLabel, gbc);
     gbc.gridx = 1;
     add(descripcionField, gbc);
 
     gbc.gridx = 0;
-    gbc.gridy = 3;
+    gbc.gridy = 4;
     add(stockLabel, gbc);
     gbc.gridx = 1;
     add(stockSpinner, gbc);
 
     gbc.gridx = 0;
-    gbc.gridy = 4;
+    gbc.gridy = 5;
     add(materialLabel, gbc);
     gbc.gridx = 1;
     add(hierroCheckBox, gbc);
@@ -107,13 +110,13 @@ public class AgregarArticuloDialog extends JDialog {
     add(plasticoCheckBox, gbc);
 
     gbc.gridx = 0;
-    gbc.gridy = 5;
+    gbc.gridy = 6;
     add(usoLabel, gbc);
     gbc.gridx = 1;
     add(usoComboBox, gbc);
 
     gbc.gridx = 0;
-    gbc.gridy = 6;
+    gbc.gridy = 7;
     add(herramientasLabel, gbc);
     gbc.gridx = 1;
     add(manualButton, gbc);
@@ -124,7 +127,7 @@ public class AgregarArticuloDialog extends JDialog {
     gbc.gridx = 4;
     add(llavesButton, gbc);
     gbc.gridx = 0;
-    gbc.gridy = 7;
+    gbc.gridy = 8;
     add(destornilladoresButton, gbc);
     gbc.gridx = 1;
     add(grapadoraButton, gbc);
@@ -142,7 +145,7 @@ public class AgregarArticuloDialog extends JDialog {
     // Botón para agregar el artículo
     JButton agregarButton = new JButton("Agregar artículo");
     gbc.gridx = 1;
-    gbc.gridy = 8;
+    gbc.gridy = 9;
     add(agregarButton, gbc);
 
     // Acción del botón "Agregar artículo"
