@@ -13,25 +13,30 @@ import java.util.ArrayList;
 public class Canvas22 extends JFrame implements MouseListener{
 
     Container contenedor;
-    ArrayList<Integer> vectorX = new ArrayList<>();
-    ArrayList<Integer> vectorY = new ArrayList<>();
+    ArrayList<Integer> vectorX;
+    ArrayList<Integer> vectorY;
     int nodos = 0;
     
+    boolean reinicio = false;
 
     public Canvas22(){
         contenedor = getContentPane();
         addMouseListener(this);
 
         setSize(500,300);
-        setTitle("Canvas 3");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Canvas 2-2");
+        setLocationRelativeTo(null);
     }
 
     public void paint(Graphics g){
         for(int i = 0; i < (nodos-1);i++){
+            //pinta cada linea teniendo los valores de los puntos de los vectores
             g.drawLine(vectorX.get(i), vectorY.get(i),vectorX.get(i+1), vectorY.get(i+1));
         }
-
+        if(reinicio){
+            g.clearRect(0, 0, getWidth(), getHeight());
+            reinicio = false;
+        }
     }
 
 
@@ -45,11 +50,14 @@ public class Canvas22 extends JFrame implements MouseListener{
     }
     @Override
     public void mousePressed(MouseEvent e) {
+        //Valores de los puntos en X y Y
         int x = e.getX();
-        vectorX.add(x);
         int y = e.getY();
+        //Valores adicionados a los puntos
+        vectorX.add(x);
         vectorY.add(y);
-        nodos++;
+
+        nodos++; //adicion a la cantidad de puntos/nodos
         repaint();
     }
     @Override
@@ -59,12 +67,15 @@ public class Canvas22 extends JFrame implements MouseListener{
     }
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
+        //reinicio a los valores por defecto de las variables
+        vectorX = new ArrayList<>();
+        vectorY = new ArrayList<>();
+        nodos = 0;
     }
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
+        //reinicia el canvas cuando el mouse sale de la pantalla
+        reinicio = true;
+        repaint();
     }
 }

@@ -9,12 +9,16 @@ import java.awt.event.MouseListener;
 
 public class Canvas1 extends JFrame implements MouseListener{
 
+    //Variales globales
     Container contenedor;
-    int Ex = 0;
-    int Ey = 0;
-    int Sx = 0;
-    int Sy = 0;
+    int Ex = 0;  //posicion de entrada en x
+    int Ey = 0;  //posicion de entrada en y
+    int Sx = 0;  //posicion de salida en x
+    int Sy = 0;  //posicion de salida en y
 
+    boolean reinicio = false;
+
+    //INTERFAZ GRAFICA
     public Canvas1(){
         contenedor = getContentPane();
 
@@ -24,10 +28,16 @@ public class Canvas1 extends JFrame implements MouseListener{
         setTitle("INTERFACES 2");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
+    //medoto de pintado
     public void paint(Graphics g){
+        //si los valores de entrada son diferentes de 0 pinta
         if(!(Ex == 0 || Ey == 0 || Sx == 0 || Sy ==0 )){
             g.drawLine(Ex, Ey, Sx, Sy);
+        }
+        //clear the interfaz
+        if(reinicio){
+            g.clearRect(0, 0, getWidth(), getHeight());
+            reinicio = false;
         }
     }
     
@@ -41,15 +51,17 @@ public class Canvas1 extends JFrame implements MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
+        //valores de entrada al presionar el click
         Ex = e.getX();
         Ey = e.getY();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        //valores de salida al soltar el click
         Sx = e.getX();
         Sy = e.getY();
-        repaint();
+        repaint(); //repinta con los valores establecidos
     }
 
     @Override
@@ -60,7 +72,8 @@ public class Canvas1 extends JFrame implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
+        //reinicia el canvas cuando el mouse sale de la pantalla
+        reinicio = true;
+        repaint();
     }
 }

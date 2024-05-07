@@ -22,8 +22,8 @@ public class Canvas2 extends JFrame implements MouseListener{
         addMouseListener(this);
 
         setSize(500,300);
-        setTitle("Canvas 3");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Canvas 2");
+        setLocationRelativeTo(null);
     }
 
     public void paint(Graphics g){
