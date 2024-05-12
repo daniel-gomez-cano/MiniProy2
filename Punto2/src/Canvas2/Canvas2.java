@@ -13,21 +13,24 @@ import java.awt.event.MouseListener;
 public class Canvas2 extends JFrame implements MouseListener{
 
     Container contenedor;
-    
+    //Creacion de poligono a mostrar
     Polygon poligono_visible = new Polygon();
-    Polygon poligono_data = new Polygon();
 
+    //GUI
     public Canvas2(){
         contenedor = getContentPane();
         addMouseListener(this);
 
         setSize(500,300);
-        setTitle("Canvas 3");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Poligono con puntos");
+        setLocationRelativeTo(null);
     }
 
+    //Metodo que pinta el canvas
     public void paint(Graphics g){
+        //Primero limpia el canvas
         g.clearRect(0, 0, getWidth(), getHeight());
+        //Luego pinta el poligono visible
         g.drawPolygon(poligono_visible);
     }
 
@@ -41,11 +44,11 @@ public class Canvas2 extends JFrame implements MouseListener{
     }
     @Override
     public void mousePressed(MouseEvent e) {
-        
+        //puntos donde se da click
         int x = e.getX();
         int y = e.getY();
-        poligono_data.addPoint(x, y);
-        poligono_visible = poligono_data;
+        //se agregan al poligono
+        poligono_visible.addPoint(x, y);
         repaint();
         
         
@@ -62,8 +65,8 @@ public class Canvas2 extends JFrame implements MouseListener{
     }
     @Override
     public void mouseExited(MouseEvent e) {
+        //reinicia el valor del poligono
         poligono_visible.reset();
         repaint();
-
     }
 }
