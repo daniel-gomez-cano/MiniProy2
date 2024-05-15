@@ -20,6 +20,9 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
+import Excepciones.DuplicateIDException;
+import Excepciones.EmptyException;
+
 public class AgregarArticuloDialog extends JDialog {
     public AgregarArticuloDialog(JFrame owner, ArrayList<Articulo> articulos, ArticuloTableModel model) {
     super(owner, true);
@@ -119,9 +122,31 @@ public class AgregarArticuloDialog extends JDialog {
             try{
             String nombre = nombreField.getText();
             int id = Integer.parseInt(idField.getText());
+
+            // Verificar si el ID ya existe en la lista de artículos
+            boolean existID = false;
+            for (Articulo articulo : articulos) {
+                if (articulo.getId() == id) {
+                    existID = true;
+                }
+            }
+            if(existID){
+                throw new DuplicateIDException("Ya existe un artículo con el mismo ID.");
+            }
+
+            if(id <= 0){
+                //Excepcion que evita numeros de ID negativos o iguales a 0
+                throw new DuplicateIDException("ID no valido, favor ingresar un numero de ID positivo");
+            }
+
             int precio = Integer.parseInt(precioField.getText());
             String descripcion = descripcionField.getText();
             int stock = (int) stockSpinner.getValue();
+
+            if("".equals(nombre) || "".equals(descripcion)){
+                    throw new EmptyException("Por favor poner nombre y descripcion al producto");
+                }
+
             String material = "";
             if (hierroCheckBox.isSelected()) {
                 material += "Hierro (o derivados), ";
@@ -134,6 +159,9 @@ public class AgregarArticuloDialog extends JDialog {
             }
             if (plasticoCheckBox.isSelected()) {
                 material += "Plástico, ";
+            }
+            if(material.equals("")){
+                material += "No especificado";
             }
             String uso = (String) usoComboBox.getSelectedItem();
             String herramientas = "";
@@ -151,14 +179,11 @@ public class AgregarArticuloDialog extends JDialog {
                 herramientas = "Grapadora";
             } else if (maquinaButton.isSelected()) {
                 herramientas = "Máquina especial";
+            }else{
+                throw new EmptyException("Favor elegir una herramienta");
             }
 
-            // Verificar si el ID ya existe en la lista de artículos
-            for (Articulo articulo : articulos) {
-                if (articulo.getId() == id) {
-                    throw new DuplicateIDException("Ya existe un artículo con el mismo ID.");
-                }
-            }
+            
 
             // Crear un nuevo artículo con los datos obtenidos
             Articulo nuevoArticulo = new Articulo(id, nombre,precio, stock, material, uso, herramientas, descripcion);
@@ -174,7 +199,9 @@ public class AgregarArticuloDialog extends JDialog {
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Por favor, ingrese números válidos en los campos correspondientes.", "Entrada inválida", JOptionPane.ERROR_MESSAGE);
         }catch(DuplicateIDException ex){
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "ID duplicado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ID problema", JOptionPane.ERROR_MESSAGE);
+        } catch (EmptyException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Entradas vacias", JOptionPane.ERROR_MESSAGE);
         }
     }
     });

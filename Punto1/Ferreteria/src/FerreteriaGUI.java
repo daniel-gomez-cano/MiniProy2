@@ -153,21 +153,19 @@ public class FerreteriaGUI extends JFrame {
             }
         });
 
+        JButton estadisticasButton = new JButton("Estadisticas");
+        estadisticasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { 
+                new Estadisticas(FerreteriaGUI.this,articulos , model);
+            }
+        });
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(agregarButton);
         buttonPanel.add(eliminarButton);
         buttonPanel.add(editarButton);
+        buttonPanel.add(estadisticasButton);
         add(buttonPanel, BorderLayout.SOUTH);
-        add(buttonPanel, BorderLayout.SOUTH);
-        add(buttonPanel, BorderLayout.SOUTH);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new FerreteriaGUI().setVisible(true);
-            }
-        });
     }
 }

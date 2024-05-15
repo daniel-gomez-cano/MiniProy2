@@ -12,6 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Excepciones.EmptyException;
+import Excepciones.NegativeStockException;
+
 public class EditarArticuloDialog extends JDialog {
     private Articulo articulo;
     private ArrayList<Articulo> articulos;
@@ -87,6 +90,16 @@ public class EditarArticuloDialog extends JDialog {
                     String herramientas = herramientasField.getText();
                     String descripcion = descripcionField.getText();
 
+                    if(stock < 0){
+                        throw new NegativeStockException("No se puede tener cantidad en el inventario negativa");
+                    }
+
+                    if("".equals(nombre) || "".equals(material) || "".equals(uso) || "".equals(herramientas) || "".equals(descripcion)){
+                        //Excepcion que evita campos vacios
+                        throw new EmptyException("No dejar ningun espacio vacio");
+                    }
+
+
                     // Actualizar el objeto Artículo con los nuevos datos
                     articulo.setId(id);
                     articulo.setNombre(nombre);
@@ -104,8 +117,12 @@ public class EditarArticuloDialog extends JDialog {
                     // Cerrar la ventana emergente
                     dispose();
                 }catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese números válidos en los campos correspondientes.", "Entrada inválida", JOptionPane.ERROR_MESSAGE);
-        }
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese números válidos en los campos correspondientes.", "Entrada inválida", JOptionPane.ERROR_MESSAGE);
+                } catch (NegativeStockException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Cantidad de inventario invalida", JOptionPane.ERROR_MESSAGE);
+                } catch (EmptyException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Campos vacios", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 

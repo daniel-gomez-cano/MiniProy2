@@ -26,7 +26,7 @@ public class VSC extends JFrame {
         contenedorPrincipal = getContentPane();
         BorderLayout borderLayout = new BorderLayout();
         contenedorPrincipal.setLayout(borderLayout);
-        JLabel WaterM = new JLabel(new ImageIcon(new ImageIcon("Images/Captura_de_pantalla_2024-05-14_141632-removebg-preview.png").getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH)));
+        JLabel WaterM = new JLabel(new ImageIcon(new ImageIcon("Punto3/Images/Captura_de_pantalla_2024-05-14_141632-removebg-preview.png").getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH)));
         contenedorPrincipal.add(WaterM);
         //Estetica General
         Color HyperDarkGray = new Color(24, 24, 24);
@@ -40,13 +40,13 @@ public class VSC extends JFrame {
         // el JMenu y JMenuItem Sirven para simular las opciones en la barra
         JMenuBar barra = new JMenuBar();
         barra.setBorder(border);
-        ImageIcon imagenlogo = new ImageIcon(new ImageIcon("Images/visual-studio-code-logo.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        ImageIcon imagenlogo = new ImageIcon(new ImageIcon("Punto3/Images/visual-studio-code-logo.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
         JLabel logo = new JLabel(imagenlogo);
-        JLabel Arrows = new JLabel(new ImageIcon(new ImageIcon("Images/Captura de pantalla 2024-05-14 153240.png").getImage().getScaledInstance(50, 25, Image.SCALE_SMOOTH)));
+        JLabel Arrows = new JLabel(new ImageIcon(new ImageIcon("Punto3/Images/Captura de pantalla 2024-05-14 153240.png").getImage().getScaledInstance(50, 25, Image.SCALE_SMOOTH)));
         JTextField Buscador = new JTextField(25);
         Buscador.setBackground(Color.gray);
         Buscador.setPreferredSize(new Dimension(10,25));
-        JLabel Toggles = new JLabel(new ImageIcon(new ImageIcon("Images/Captura de pantalla 2024-05-14 161540.png").getImage().getScaledInstance(150, 25, Image.SCALE_SMOOTH)));
+        JLabel Toggles = new JLabel(new ImageIcon(new ImageIcon("Punto3/Images/Captura de pantalla 2024-05-14 161540.png").getImage().getScaledInstance(150, 25, Image.SCALE_SMOOTH)));
         
         JMenu File = new JMenu("File");
         JMenuItem NewTextFile = new JMenuItem("New Text File");
@@ -185,13 +185,13 @@ public class VSC extends JFrame {
         contenedorIzquieda.add(barraIzquierda_1);
         barraIzquierda_1.setLayout(new BoxLayout(barraIzquierda_1, BoxLayout.Y_AXIS));
         
-        JLabel Explorer = new JLabel(new ImageIcon(new ImageIcon("Images/Captura de pantalla 2024-05-14 142046.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
-        JLabel Search = new JLabel(new ImageIcon(new ImageIcon("Images/Captura de pantalla 2024-05-14 142053.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
-        JLabel Source = new JLabel(new ImageIcon(new ImageIcon("Images/Captura de pantalla 2024-05-14 142103.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
-        JLabel RaD = new JLabel(new ImageIcon(new ImageIcon("Images/Captura de pantalla 2024-05-14 142109.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
-        JLabel Extencion = new JLabel(new ImageIcon(new ImageIcon("Images/Captura de pantalla 2024-05-14 142118.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
-        JLabel Testing = new JLabel(new ImageIcon(new ImageIcon("Images/Captura de pantalla 2024-05-14 142128.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
-        JLabel Account = new JLabel(new ImageIcon(new ImageIcon("Images/Captura de pantalla 2024-05-14 162002.png").getImage().getScaledInstance(40, 80, Image.SCALE_SMOOTH)));
+        JLabel Explorer = new JLabel(new ImageIcon(new ImageIcon("Punto3/Images/Captura de pantalla 2024-05-14 142046.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        JLabel Search = new JLabel(new ImageIcon(new ImageIcon("Punto3/Images/Captura de pantalla 2024-05-14 142053.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        JLabel Source = new JLabel(new ImageIcon(new ImageIcon("Punto3/Images/Captura de pantalla 2024-05-14 142103.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        JLabel RaD = new JLabel(new ImageIcon(new ImageIcon("Punto3/Images/Captura de pantalla 2024-05-14 142109.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        JLabel Extencion = new JLabel(new ImageIcon(new ImageIcon("Punto3/Images/Captura de pantalla 2024-05-14 142118.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        JLabel Testing = new JLabel(new ImageIcon(new ImageIcon("Punto3/Images/Captura de pantalla 2024-05-14 142128.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        JLabel Account = new JLabel(new ImageIcon(new ImageIcon("Punto3/Images/Captura de pantalla 2024-05-14 162002.png").getImage().getScaledInstance(40, 80, Image.SCALE_SMOOTH)));
         barraIzquierda_1.add(Explorer);
         barraIzquierda_1.add(Search);
         barraIzquierda_1.add(Source);
