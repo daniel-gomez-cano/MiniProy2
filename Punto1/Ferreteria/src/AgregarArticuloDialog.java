@@ -1,9 +1,9 @@
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+//Ya no lo muestro con un grid personalizado, si no con un JPAnel
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -11,20 +11,23 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.border.EmptyBorder;
 
 public class AgregarArticuloDialog extends JDialog {
     public AgregarArticuloDialog(JFrame owner, ArrayList<Articulo> articulos, ArticuloTableModel model) {
     super(owner, true);
     setTitle("Agregar nuevo artículo");
     setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-    setSize(400, 400);
-    setLayout(new GridBagLayout());
-    GridBagConstraints gbc = new GridBagConstraints();
+
+    JPanel contentPanel = new JPanel(new GridLayout(15, 3, 5, 5)); // GridLayout(rows, cols, hgap, vgap)
+    contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10)); // Establecer un margen de 10 píxeles en todos los lados
 
     // JLabels
     JLabel nombreLabel = new JLabel("Nombre:");
@@ -66,74 +69,6 @@ public class AgregarArticuloDialog extends JDialog {
     JRadioButton grapadoraButton = new JRadioButton("Grapadora");
     JRadioButton maquinaButton = new JRadioButton("Máquina especial");
 
-    // Agregar componentes al contenedor
-    gbc.gridx = 0;
-    gbc.gridy = 0;
-    add(nombreLabel, gbc);
-    gbc.gridx = 1;
-    add(nombreField, gbc);
-
-    gbc.gridx = 0;
-    gbc.gridy = 1;
-    add(idLabel, gbc);
-    gbc.gridx = 1;
-    add(idField, gbc);
-    
-    gbc.gridx = 0;
-    gbc.gridy = 2;
-    add(precioLabel,gbc);
-    gbc.gridx = 1;
-    add(precioField,gbc);
-
-    gbc.gridx = 0;
-    gbc.gridy = 3;
-    add(descripcionLabel, gbc);
-    gbc.gridx = 1;
-    add(descripcionField, gbc);
-
-    gbc.gridx = 0;
-    gbc.gridy = 4;
-    add(stockLabel, gbc);
-    gbc.gridx = 1;
-    add(stockSpinner, gbc);
-
-    gbc.gridx = 0;
-    gbc.gridy = 5;
-    add(materialLabel, gbc);
-    gbc.gridx = 1;
-    add(hierroCheckBox, gbc);
-    gbc.gridx = 2;
-    add(gomaCheckBox, gbc);
-    gbc.gridx = 3;
-    add(maderaCheckBox, gbc);
-    gbc.gridx = 4;
-    add(plasticoCheckBox, gbc);
-
-    gbc.gridx = 0;
-    gbc.gridy = 6;
-    add(usoLabel, gbc);
-    gbc.gridx = 1;
-    add(usoComboBox, gbc);
-
-    gbc.gridx = 0;
-    gbc.gridy = 7;
-    add(herramientasLabel, gbc);
-    gbc.gridx = 1;
-    add(manualButton, gbc);
-    gbc.gridx = 2;
-    add(martilloButton, gbc);
-    gbc.gridx = 3;
-    add(alicateButton, gbc);
-    gbc.gridx = 4;
-    add(llavesButton, gbc);
-    gbc.gridx = 0;
-    gbc.gridy = 8;
-    add(destornilladoresButton, gbc);
-    gbc.gridx = 1;
-    add(grapadoraButton, gbc);
-    gbc.gridx = 2;
-    add(maquinaButton, gbc);
-
     herramientasGroup.add(manualButton);
     herramientasGroup.add(martilloButton);
     herramientasGroup.add(alicateButton);
@@ -142,17 +77,46 @@ public class AgregarArticuloDialog extends JDialog {
     herramientasGroup.add(grapadoraButton);
     herramientasGroup.add(maquinaButton);
 
+    // Agregar componentes al panel de contenido
+    contentPanel.add(nombreLabel);
+    contentPanel.add(nombreField);
+    contentPanel.add(idLabel);
+    contentPanel.add(idField);
+    contentPanel.add(precioLabel);
+    contentPanel.add(precioField);
+    contentPanel.add(descripcionLabel);
+    contentPanel.add(descripcionField);
+    contentPanel.add(stockLabel);
+    contentPanel.add(stockSpinner);
+    contentPanel.add(materialLabel);
+    contentPanel.add(hierroCheckBox);
+    contentPanel.add(new JLabel()); // Espacio vacío para alinear CheckBoxes
+    contentPanel.add(gomaCheckBox);
+    contentPanel.add(new JLabel()); // Espacio vacío para alinear CheckBoxes
+    contentPanel.add(maderaCheckBox);
+    contentPanel.add(new JLabel()); // Espacio vacío para alinear CheckBoxes
+    contentPanel.add(plasticoCheckBox);
+    contentPanel.add(usoLabel);
+    contentPanel.add(usoComboBox);
+    contentPanel.add(herramientasLabel);
+    contentPanel.add(manualButton);
+    contentPanel.add(martilloButton);
+    contentPanel.add(alicateButton);
+    contentPanel.add(llavesButton);
+    contentPanel.add(destornilladoresButton);
+    contentPanel.add(grapadoraButton);
+    contentPanel.add(maquinaButton);
+
     // Botón para agregar el artículo
     JButton agregarButton = new JButton("Agregar artículo");
-    gbc.gridx = 1;
-    gbc.gridy = 9;
-    add(agregarButton, gbc);
+    contentPanel.add(agregarButton,BorderLayout.SOUTH); // Agregar el botón al panel
 
     // Acción del botón "Agregar artículo"
     agregarButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Obtener los datos de los componentes
+            try{
             String nombre = nombreField.getText();
             int id = Integer.parseInt(idField.getText());
             int precio = Integer.parseInt(precioField.getText());
@@ -189,6 +153,13 @@ public class AgregarArticuloDialog extends JDialog {
                 herramientas = "Máquina especial";
             }
 
+            // Verificar si el ID ya existe en la lista de artículos
+            for (Articulo articulo : articulos) {
+                if (articulo.getId() == id) {
+                    throw new DuplicateIDException("Ya existe un artículo con el mismo ID.");
+                }
+            }
+
             // Crear un nuevo artículo con los datos obtenidos
             Articulo nuevoArticulo = new Articulo(id, nombre,precio, stock, material, uso, herramientas, descripcion);
 
@@ -200,14 +171,19 @@ public class AgregarArticuloDialog extends JDialog {
 
             // Cerrar la ventana emergente
             dispose();
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese números válidos en los campos correspondientes.", "Entrada inválida", JOptionPane.ERROR_MESSAGE);
+        }catch(DuplicateIDException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ID duplicado", JOptionPane.ERROR_MESSAGE);
         }
+    }
     });
+
+    // Agregar el panel de contenido al diálogo
+    getContentPane().add(contentPanel, BorderLayout.CENTER);
 
     pack();
     setLocationRelativeTo(owner);
     setVisible(true);
 }
-
-
-    // Métodos y eventos
 }
