@@ -1,14 +1,16 @@
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class EditarArticuloDialog extends JDialog {
     private Articulo articulo;
@@ -24,7 +26,9 @@ public class EditarArticuloDialog extends JDialog {
 
         setTitle("Editar artículo");
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        setLayout(new GridLayout(9, 2));
+
+        JPanel contentPanel = new JPanel(new GridLayout(9, 2));
+        contentPanel.setBorder(new EmptyBorder(10,10,10,10));
 
         JLabel idLabel = new JLabel("ID:");
         idField = new JTextField(String.valueOf(articulo.getId()));
@@ -51,59 +55,65 @@ public class EditarArticuloDialog extends JDialog {
         JLabel descripcionLabel = new JLabel("Descripción:");
         descripcionField = new JTextField(articulo.getDescripcion());
 
-        add(idLabel);
-        add(idField);
-        add(nombreLabel);
-        add(nombreField);
-        add(precioLabel);
-        add(precioField);
-        add(stockLabel);
-        add(stockField);
-        add(materialLabel);
-        add(materialField);
-        add(usoLabel);
-        add(usoField);
-        add(herramientasLabel);
-        add(herramientasField);
-        add(descripcionLabel);
-        add(descripcionField);
+        contentPanel.add(idLabel);
+        contentPanel.add(idField);
+        contentPanel.add(nombreLabel);
+        contentPanel.add(nombreField);
+        contentPanel.add(precioLabel);
+        contentPanel.add(precioField);
+        contentPanel.add(stockLabel);
+        contentPanel.add(stockField);
+        contentPanel.add(materialLabel);
+        contentPanel.add(materialField);
+        contentPanel.add(usoLabel);
+        contentPanel.add(usoField);
+        contentPanel.add(herramientasLabel);
+        contentPanel.add(herramientasField);
+        contentPanel.add(descripcionLabel);
+        contentPanel.add(descripcionField);
 
         JButton guardarButton = new JButton("Guardar cambios");
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtener los nuevos datos de los componentes
-                int id = Integer.parseInt(idField.getText());
-                String nombre = nombreField.getText();
-                int precio = Integer.parseInt(precioField.getText());
-                int stock = Integer.parseInt(stockField.getText());
-                String material = materialField.getText();
-                String uso = usoField.getText();
-                String herramientas = herramientasField.getText();
-                String descripcion = descripcionField.getText();
+                try {
+                    // Obtener los nuevos datos de los componentes
+                    int id = Integer.parseInt(idField.getText());
+                    String nombre = nombreField.getText();
+                    int precio = Integer.parseInt(precioField.getText());
+                    int stock = Integer.parseInt(stockField.getText());
+                    String material = materialField.getText();
+                    String uso = usoField.getText();
+                    String herramientas = herramientasField.getText();
+                    String descripcion = descripcionField.getText();
 
-                // Actualizar el objeto Artículo con los nuevos datos
-                articulo.setId(id);
-                articulo.setNombre(nombre);
-                articulo.setPrecio(precio);
-                articulo.setStock(stock);
-                articulo.setMaterial(material);
-                articulo.setUso(uso);
-                articulo.setHerramientas(herramientas);
-                articulo.setDescripcion(descripcion);
+                    // Actualizar el objeto Artículo con los nuevos datos
+                    articulo.setId(id);
+                    articulo.setNombre(nombre);
+                    articulo.setPrecio(precio);
+                    articulo.setStock(stock);
+                    articulo.setMaterial(material);
+                    articulo.setUso(uso);
+                    articulo.setHerramientas(herramientas);
+                    articulo.setDescripcion(descripcion);
 
-                // Actualizar la fila correspondiente en el JTable
-                int rowIndex = articulos.indexOf(articulo);
-                model.fireTableRowsUpdated(rowIndex, rowIndex);
+                    // Actualizar la fila correspondiente en el JTable
+                    int rowIndex = articulos.indexOf(articulo);
+                    model.fireTableRowsUpdated(rowIndex, rowIndex);
 
-                // Cerrar la ventana emergente
-                dispose();
+                    // Cerrar la ventana emergente
+                    dispose();
+                }catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese números válidos en los campos correspondientes.", "Entrada inválida", JOptionPane.ERROR_MESSAGE);
+        }
             }
         });
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(guardarButton);
-        add(buttonPanel);
+
+        add(contentPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
 
         pack();
         setLocationRelativeTo(owner);
