@@ -95,7 +95,7 @@ public class EditarArticuloDialog extends JDialog {
         JLabel descripcionLabel = new JLabel("Descripción:");
         descripcionField = new JTextField(articulo.getDescripcion());
 
-        // Ajustar las restricciones de gbc para cada componente, una cosa muy larga como cojones lo hago más corto
+        // Ajustar las restricciones de gbc para cada componente
         gbc.gridx = 0;
         gbc.gridy = 0;
         contentPanel.add(idLabel, gbc);
